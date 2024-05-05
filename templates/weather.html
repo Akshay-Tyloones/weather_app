@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">  
+    <title>Document</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+body {
+  background: #111;
+}
+img {
+  max-width: 100%;
+}
+.main {
+    width: 100%;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    
+}
+.container {
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    width: 70%;
+    height: 540px;
+    border-radius:20px;
+    padding: 10px;
+    background: linear-gradient(120deg, #00feba, #5b548a);
+}
+.weather-card {
+  width: 90%;
+  max-width: 450px;
+  height: 100%;
+  text-align: center;
+  padding: 10px;
+  border-radius: 20px;
+  /* border: 1px solid blue; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  color: #fff;
+  /* background: linear-gradient(120deg, #00feba, #5b548a); */
+}
+.weather-card .search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.weather-card .search input {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  flex: 1;
+  color: #555;
+  padding: 10px 25px;
+  outline: none;
+  background: #ebfffc;
+  border: none;
+  border-radius: 30px;
+}
+.weather-card .search button {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  margin-left: 16px;
+  border: none;
+  outline: 0;
+  background: #ebfffc;
+  border-radius: 50%;
+}
+.weather-card .search button i {
+  font-size: 20px;
+  color: #333;
+  
+}
+.five_days_weather_card{
+    width: 500px;
+    height: 540px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 1px solid green;
+    /* background: linear-gradient(120deg, #00feba, #5b548a); */
+    
+}
+.weather h1 {
+  font-size: 80px;
+  font-weight: 500;
+  margin-top: -30px;
+}
+.weather h2 {
+  font-size: 40px;
+  font-weight: 400;
+  margin-top: -25px;
+}
+.weather .weather-icon {
+  width: 60%;
+  height: 200px;
+  padding: 10px;
+}
+.details {
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.details .humi {
+  filter: brightness(10000%);
+}
+.details img {
+  width: 40px;
+  height: 40px;
+}
+.details .info {
+  margin-left: 10px;
+}
+.details .humidity,
+.wind {
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: -5px;
+}
+.col {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  margin-top: -20px;
+}
+
+</style>
+<body>
+    <div class="main">
+
+    <div class="container">
+
+    
+    <div class="weather-card">
+      {% csrf_token %} 
+
+        <form action="" method='get'>
+        <div class="search">
+          <input type="search" name = 'city' placeholder="enter city name" spellcheck="false">
+          <button>
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+    </form>
+        <div class="weather">
+          <img class="weather-icon" src="https://openweathermap.org/img/wn/{{data.icon}}.png" alt="...">
+          <h1 class="temp">{{data.temperature}}°C </h1>
+          <h2 class="city">{{data.city}}</h2>
+          <div class="details">
+            <div style="display: flex;" class="col">
+              <img class="humi" src="https://static-00.iconduck.com/assets.00/humidity-icon-2048x1675-xxsge5os.png">
+              <div class="info">
+                <p class="humidity">{{data.humidity}}%</p>
+                <p>Humidity</p>
+              </div>
+            </div>
+            <div class="col">
+              <img src="https://cdn-icons-png.flaticon.com/512/136/136712.png">
+              <div class="info">
+                <p class="wind">{{data.wind_speed}} km/h</p>
+                <p>Wind Speed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="five_days_weather_card">
+
+      </div> 
+    </div>
+    </div>
+</body>
+</html>
