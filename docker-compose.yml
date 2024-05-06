@@ -1,32 +1,42 @@
-version: '3.12'
+version: '1'
 
 services:
-  web:
+  weather_app:
     build: .
+    container_name: weather_app_container
     environment:
       - PYTHONUNBUFFERED=1
-      - DB_HOST=postgres_db
+      - DB_HOST=postgres_service
       - DB_PORT=5432
       - DB_NAME=weather_app_db
       - DB_USER=postgres
       - DB_PASSWORD=Akshay
     command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:9000"
     ports:
-      - "7000:9000"
+      - "9000:9000"
     volumes:
       - .:/app
     depends_on:
-      - postgres_db
+      - postgres_service
+    networks:
+      - weather_app_net
     
     
-  postgres_db:
+  postgres_service:
     image: postgres
+    container_name: weather_app_postgres_container
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: weather_app_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Akshay
+    networks:
+      - weather_app_net
+
+networks:
+  weather_app_net:
+    driver: bridge
 
 volumes:
- postgres_data:
+  postgres_data:
